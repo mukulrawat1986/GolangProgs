@@ -12,9 +12,10 @@ const (
 func Hello(name, language string) string {
 	if name == "" {
 		name = "World"
-	}
-	if language == spanish {
+	} else if language == spanish {
 		return spanishHelloPrefix + name
+	} else if language == "French" {
+		return "Bonjour, " + name
 	}
 	return englishHelloPrefix + name
 }
