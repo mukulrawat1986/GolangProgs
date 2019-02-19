@@ -15,10 +15,10 @@ func main() {
 	mux := http.NewServeMux()
 
 	// convert the timeHandler function to a HandlerFunc type
-	th := http.HandlerFunc(timeHandler)
+	// th := http.HandlerFunc(timeHandler)
 
 	// add it to the ServeMux
-	mux.Handle("/time", th)
+	mux.HandleFunc("/time", timeHandler)
 
 	log.Println("Listening...")
 	http.ListenAndServe(":3000", mux)
