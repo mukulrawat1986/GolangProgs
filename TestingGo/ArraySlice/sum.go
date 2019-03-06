@@ -1,5 +1,9 @@
 package ArraySlice
 
 func Sum(numbers [5]int) int {
-	return 0
+	var sum int
+	for _, number := range numbers {
+		sum += number
+	}
+	return sum
 }
