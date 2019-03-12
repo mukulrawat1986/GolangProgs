@@ -5,6 +5,14 @@ type Rectangle struct {
 	Height float64
 }
 
-func Area(rectangle Rectangle) float64 {
-	return rectangle.Width * rectangle.Height
+type Circle struct {
+	Radius float64
+}
+
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+func (c Circle) Area() float64 {
+	return 0
 }
