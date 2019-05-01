@@ -1,5 +1,10 @@
 package iteration
 
+// Repeat function repeates a string five times
 func Repeat(character string) string {
-	return ""
+	var repeated string
+	for i := 0; i < 5; i++ {
+		repeated += character
+	}
+	return repeated
 }
