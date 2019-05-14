@@ -49,4 +49,10 @@ func TestSumAllTails(t *testing.T) {
 		want := []int{2, 9}
 		assertSliceEquality(t, got, want)
 	})
+
+	t.Run("safely sum an empty slice", func(t *testing.T) {
+		got := SumAllTails([]int{}, []int{3, 4, 5})
+		want := []int{0, 9}
+		assertSliceEquality(t, got, want)
+	})
 }
