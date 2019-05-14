@@ -12,7 +12,14 @@ func Sum(numbers []int) int {
 // SumAll takes a varying number of slices, returning a new slice containing
 // the totals for each slice passed in
 func SumAll(numbersToSum ...[]int) []int {
-	return []int{}
+	lengthOfNumbers := len(numbersToSum)
+	sums := make([]int, lengthOfNumbers)
+
+	for i, numbers := range numbersToSum {
+		sums[i] = Sum(numbers)
+	}
+
+	return sums
 }
 
 func main() {
