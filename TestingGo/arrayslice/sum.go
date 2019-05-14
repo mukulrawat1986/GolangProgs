@@ -19,6 +19,12 @@ func SumAll(numbersToSum ...[]int) []int {
 	return sums
 }
 
+// SumAllTails takes a varying number of slices, returning a new slice containing
+// the total of the tails for each slice passed in
+func SumAllTails(numbersToSum ...[]int) []int {
+	return []int{}
+}
+
 func main() {
 
 }
