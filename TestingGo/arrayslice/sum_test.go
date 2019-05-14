@@ -43,7 +43,10 @@ func TestSumAll(t *testing.T) {
 }
 
 func TestSumAllTails(t *testing.T) {
-	got := SumAllTails([]int{1, 2}, []int{0, 9})
-	want := []int{2, 9}
-	assertSliceEquality(t, got, want)
+
+	t.Run("make the sum of some slices", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2}, []int{0, 9})
+		want := []int{2, 9}
+		assertSliceEquality(t, got, want)
+	})
 }
