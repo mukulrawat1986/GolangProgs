@@ -22,7 +22,11 @@ func SumAll(numbersToSum ...[]int) []int {
 // SumAllTails takes a varying number of slices, returning a new slice containing
 // the total of the tails for each slice passed in
 func SumAllTails(numbersToSum ...[]int) []int {
-	return []int{}
+	var sums []int
+	for _, numbers := range numbersToSum {
+		sums = append(sums, Sum(numbers[1:]))
+	}
+	return sums
 }
 
 func main() {
