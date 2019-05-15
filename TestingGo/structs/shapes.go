@@ -7,5 +7,5 @@ func Perimeter(width, height float64) float64 {
 
 // Area returns the area of a rectangle
 func Area(width, height float64) float64 {
-	return 0
+	return width * height
 }
