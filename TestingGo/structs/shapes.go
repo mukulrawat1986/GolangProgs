@@ -1,11 +1,12 @@
 package shapes
 
-// Perimeter returns the perimeter of a rectangle
-func Perimeter(width, height float64) float64 {
-	return 2 * (width + height)
+// Rectangle type to represent a rectangle
+type Rectangle struct {
+	Width  float64
+	Height float64
 }
 
 // Area returns the area of a rectangle
-func Area(width, height float64) float64 {
-	return width * height
+func Area(rectangle Rectangle) float64 {
+	return rectangle.Width * rectangle.Height
 }
