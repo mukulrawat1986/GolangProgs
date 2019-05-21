@@ -16,7 +16,7 @@ type Wallet struct {
 	balance Bitcoin
 }
 
-// Deposit method deposits bitcoins in our bitcoin
+// Deposit method deposits bitcoins in our wallet
 func (w *Wallet) Deposit(amount Bitcoin) {
 	w.balance += amount
 }
@@ -24,4 +24,9 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 // Balance method returns the number of bitcoins in our wallet
 func (w *Wallet) Balance() Bitcoin {
 	return w.balance
+}
+
+// Withdraw method to withdraw bitcoins from our wallet
+func (w *Wallet) Withdraw(amount Bitcoin) {
+
 }
