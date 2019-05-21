@@ -3,14 +3,18 @@ package wallet
 import "testing"
 
 func TestWallet(t *testing.T) {
-	wallet := Wallet{}
 
-	wallet.Deposit(Bitcoin(10))
+	t.Run("Deposit", func(t *testing.T) {
+		wallet := Wallet{}
 
-	got := wallet.Balance()
-	want := Bitcoin(10)
+		wallet.Deposit(Bitcoin(10))
 
-	if got != want {
-		t.Errorf("got %s and want %s", got, want)
-	}
+		got := wallet.Balance()
+		want := Bitcoin(10)
+
+		if got != want {
+			t.Errorf("got %s and want %s", got, want)
+		}
+
+	})
 }
