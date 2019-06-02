@@ -4,7 +4,7 @@ import "fmt"
 
 const (
 	message = "%d %d %d\n"
-	answer1 = iota + 11
+	answer1 = iota * 2
 	answer2
 	answer3
 )
