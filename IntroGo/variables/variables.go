@@ -2,12 +2,12 @@ package main
 
 import "fmt"
 
-var (
-	message = "The answer to life is %d\n"
-	answer  = 42
+const (
+	message = "%d %d\n"
+	answer1 = iota
+	answer2
 )
 
 func main() {
-	answer++
-	fmt.Printf(message, answer)
+	fmt.Printf(message, answer1, answer2)
 }
