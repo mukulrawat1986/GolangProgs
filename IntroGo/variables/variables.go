@@ -3,6 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	nine := uint(9)
-	fmt.Printf("Value: %d\n", nine)
+	b := byte(65)
+	fmt.Printf("Value: % x\n", b)
 }
