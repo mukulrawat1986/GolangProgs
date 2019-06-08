@@ -2,17 +2,12 @@ package main
 
 import "fmt"
 
-func printer(msg string) (string, error) {
-	msg += "\n"
-	_, err := fmt.Print(msg)
-	return msg, err
-
+func printer(msg string) error {
+	defer fmt.Printf("\n")
+	_, err := fmt.Printf("%s", msg)
+	return err
 }
 
 func main() {
-	appendedMessage, err := printer("Hello, World!")
-	if err == nil {
-		fmt.Printf("%q\n", appendedMessage)
-	}
-
+	printer("Hello, World!")
 }
