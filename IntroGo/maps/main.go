@@ -19,4 +19,11 @@ func main() {
 	dayMonths["Dec"] = 31
 
 	fmt.Printf("Days in Feb: %d\n", dayMonths["Feb"])
+
+	days, ok := dayMonths["January"]
+	if !ok {
+		fmt.Printf("Can't get days for January\n")
+	} else {
+		fmt.Printf("%d\n", days)
+	}
 }
