@@ -10,11 +10,13 @@ func printer(w []string) {
 }
 
 func main() {
-	// a slice
-	words := []string{"the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"}
+	// creating a slice and adding strings to it
+	words := make([]string, 4)
 
-	// print out the length of the slice
-	fmt.Printf("%d\n", len(words))
+	words[0] = "The"
+	words[1] = "Quick"
+	words[2] = "Brown"
+	words[3] = "Fox"
 
-	printer(words[:2])
+	printer(words)
 }
