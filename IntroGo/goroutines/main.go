@@ -19,8 +19,12 @@ func main() {
 
 	go emit(wordChannel)
 
-	for word := range wordChannel {
-		fmt.Printf("%s ", word)
+	for {
+		if word, ok := <-wordChannel; ok != false {
+			fmt.Println(word)
+		} else {
+			break
+		}
 	}
 
 	fmt.Printf("\n")
