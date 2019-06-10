@@ -11,21 +11,17 @@ func emit(c chan string) {
 		c <- word
 	}
 
-	close(c)
+	// close(c)
 }
 
 func main() {
 	wordChannel := make(chan string)
 
 	go emit(wordChannel)
+	go emit(wordChannel)
 
-	for {
-		if word, ok := <-wordChannel; ok != false {
-			fmt.Println(word)
-		} else {
-			break
-		}
+	for word := range wordChannel {
+		fmt.Printf("%s\n", word)
 	}
 
-	fmt.Printf("\n")
 }
