@@ -4,14 +4,10 @@ import (
 	"fmt"
 )
 
-func emit(c chan string) {
-	words := []string{"The", "quick", "brown", "fox"}
+func emit(c chan int) {
+	for {
 
-	for _, word := range words {
-		c <- word
 	}
-
-	// close(c)
 }
 
 func main() {
