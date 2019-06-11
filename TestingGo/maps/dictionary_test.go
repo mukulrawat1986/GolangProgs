@@ -1,6 +1,7 @@
 package maps
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -71,6 +72,20 @@ func TestUpdate(t *testing.T) {
 
 		assertError(t, err, ErrWordDoesNotExists)
 	})
+}
+
+func TestDelete(t *testing.T) {
+	word := "test"
+	definition := "this is a test"
+
+	dictionary := Dictionary{word: definition}
+
+	dictionary.Delete(word)
+
+	_, err := dictionary.Search(word)
+	if err != ErrNotFound {
+		fmt.Errorf("Expected '%s' to be deleted", word)
+	}
 }
 
 func assertString(t *testing.T, got string, want string) {
