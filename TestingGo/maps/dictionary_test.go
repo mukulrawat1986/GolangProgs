@@ -22,12 +22,15 @@ func TestSearch(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	dictionary := Dictionary{}
-	word := "test"
-	definition := "this is just a test"
+	t.Run("existing word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		word := "test"
+		definition := "this is just a test"
 
-	dictionary.Add(word, definition)
-	assertDefinition(t, dictionary, word, definition)
+		dictionary.Add(word, definition)
+		assertDefinition(t, dictionary, word, definition)
+
+	})
 }
 
 func assertString(t *testing.T, got string, want string) {
