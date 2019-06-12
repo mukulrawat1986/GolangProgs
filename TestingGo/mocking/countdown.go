@@ -14,10 +14,10 @@ const (
 
 // Sleeper interface to handle our dependency on Sleep()
 type Sleeper interface {
-	 Sleep()
+	Sleep()
 }
 
-type DefaultSleeper struct {}
+type DefaultSleeper struct{}
 
 func (d DefaultSleeper) Sleep() {
 	time.Sleep(1 * time.Second)
