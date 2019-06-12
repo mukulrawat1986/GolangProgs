@@ -3,8 +3,8 @@ package maps
 type DictionaryErr string
 
 const (
-	ErrNotFound = DictionaryErr("could not find the word you were looking for")
-	ErrWordExists = DictionaryErr("cannot add word because it already exists")
+	ErrNotFound          = DictionaryErr("could not find the word you were looking for")
+	ErrWordExists        = DictionaryErr("cannot add word because it already exists")
 	ErrWordDoesNotExists = DictionaryErr("cannot update word because it does not exists")
 )
 
