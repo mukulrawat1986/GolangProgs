@@ -19,13 +19,18 @@ func TestCountdown(t *testing.T) {
 	// This buffer is where the writing happens in our test, so we can
 	// capture what data is being generated
 	buffer := &bytes.Buffer{}
+	spySleeper := &SpySleeper{}
 
-	Countdown(buffer)
+	Countdown(buffer, spySleeper)
 
 	got := buffer.String()
 	want := "3\n2\n1\nGo!"
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
+	}
+
+	if spySleeper.calls != 4 {
+		t.Errorf("not enough calls to sleeper, want 4 got %d", spySleeper.calls)
 	}
 }
