@@ -5,6 +5,15 @@ import (
 	"testing"
 )
 
+// SpySleeper to use in our tests as a spy
+type SpySleeper struct {
+	calls int
+}
+
+func (s *SpySleeper) Sleep() {
+	s.calls++
+}
+
 func TestCountdown(t *testing.T) {
 	// create a buffer that we inject to the Countdown function
 	// This buffer is where the writing happens in our test, so we can
