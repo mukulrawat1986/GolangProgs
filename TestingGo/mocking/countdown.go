@@ -12,6 +12,11 @@ const (
 	countdownStart = 3
 )
 
+// Sleeper interface to handle our dependency on Sleep()
+type Sleeper interface {
+	 Sleep()
+}
+
 func Countdown(writer io.Writer) {
 	for i := countdownStart; i > 0; i-- {
 		time.Sleep(1 * time.Second)
