@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"os"
 )
 
 func Greet(writer io.Writer, name string) {
@@ -10,4 +11,6 @@ func Greet(writer io.Writer, name string) {
 
 }
 
-func main() {}
+func main() {
+	Greet(os.Stdout, "Chris")
+}
