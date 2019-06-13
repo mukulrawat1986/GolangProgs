@@ -14,16 +14,16 @@ func mockWebsiteChecker(url string) bool {
 }
 
 func TestCheckWebsite(t *testing.T) {
-	websites := []string {
+	websites := []string{
 		"http://google.com",
 		"http://blog.gypsydave5.com",
 		"waat://furhurterwe.geds",
 	}
 
-	want := map[string]bool {
-			"http://google.com": true,
+	want := map[string]bool{
+		"http://google.com":          true,
 		"http://blog.gypsydave5.com": true,
-		"waat://furhurterwe.geds": false,
+		"waat://furhurterwe.geds":    false,
 	}
 
 	got := CheckWebsite(mockWebsiteChecker, websites)
@@ -40,11 +40,11 @@ func slowStubWebsiteChecker(_ string) bool {
 
 func BenchmarkCheckWebsite(b *testing.B) {
 	urls := make([]string, 100)
-	for i := 0; i<len(urls); i++ {
+	for i := 0; i < len(urls); i++ {
 		urls[i] = "a url"
 	}
 
-	for i:=0; i<b.N; i++ {
+	for i := 0; i < b.N; i++ {
 		CheckWebsite(slowStubWebsiteChecker, urls)
 	}
 }
