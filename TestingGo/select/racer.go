@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func Racer(a, b string) (winner string){
+func Racer(a, b string) (winner string) {
 	select {
 	case <-ping(a):
 		return a
