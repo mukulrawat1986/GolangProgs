@@ -8,7 +8,7 @@ func TestWalk(t *testing.T) {
 	var got []string
 
 	x := struct {
-		Name string,
+		Name string
 	}{
 		Name: expected,
 	}
