@@ -3,11 +3,12 @@ package reflection
 import "reflect"
 
 func walk(x interface{}, fn func(input string)) {
-	val := reflect.ValueOf(x) // returns a new value initialized to the concrete value stored in the
-							  // interface i
 
-	field := val.Field(0) // returns the ith field of the struct, panics if its not a struct or i
-							  // is out of range
+	val := reflect.ValueOf(x)
 
-	fn(field.String()) // returns the underlying value as a string, panics if its not a string
+	// Numfield returns the number of fields in the struct v, panics if v's kind is not Struct
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+		fn(field.String())
+	}
 }
