@@ -115,6 +115,26 @@ func TestWalk(t *testing.T) {
 				"Reykjavik",
 			},
 		},
+		{
+			Name: "Arrays",
+			Input: [2]struct {
+				Age int
+				City string
+			}{
+				{
+					Age: 33,
+					City: "London",
+				},
+				{
+					Age: 34,
+					City: "Reykjavik",
+				},
+			},
+			ExpectedCalls: []string{
+				"London",
+				"Reykjavik",
+			},
+		},
 	}
 
 
