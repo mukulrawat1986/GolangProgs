@@ -8,14 +8,15 @@ func walk(x interface{}, fn func(input string)) {
 
 	// Numfield returns the number of fields in the struct v, panics if v's kind is not Struct
 	for i := 0; i < val.NumField(); i++ {
+
 		field := val.Field(i)
 
-		if field.Kind() == reflect.String {
+		switch field.Kind() {
+		case reflect.String:
 			fn(field.String())
-		}
-
-		if field.Kind() == reflect.Struct {
+		case reflect.Struct:
 			walk(field.Interface(), fn)
 		}
+
 	}
 }
