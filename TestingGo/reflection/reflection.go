@@ -6,6 +6,13 @@ func walk(x interface{}, fn func(input string)) {
 
 	val := getValue(x)
 
+	if val.Kind() == reflect.Slice {
+		for i := 0; i < val.Len(); i++ {
+			walk(val.Index(i).Interface(), fn)
+		}
+		return
+	}
+
 
 	// Numfield returns the number of fields in the struct v, panics if v's kind is not Struct
 	for i := 0; i < val.NumField(); i++ {
