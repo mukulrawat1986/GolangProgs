@@ -22,6 +22,20 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"Chris"},
 		},
+		{
+			Name: "Struct with two string fields",
+			Input: struct {
+				Name string
+				City string
+			}{
+				Name: "Chris",
+				City: "London",
+			},
+			ExpectedCalls: []string{
+				"Chris",
+				"London",
+			},
+		},
 	}
 
 
