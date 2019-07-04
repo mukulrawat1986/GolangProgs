@@ -7,7 +7,12 @@ import (
 )
 
 func Hello(w io.Writer, name string) {
-	res := "Hello, " + name
+	var res string
+	if name == "" {
+		res = "Hello, World"
+	} else {
+		res = "Hello, " + name
+	}
 	fmt.Fprint(w, res)
 }
 
