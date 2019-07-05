@@ -15,6 +15,6 @@ func TestEcho(t *testing.T) {
 	want := "hello world\n"
 
 	if got != want {
-		t.Errorf("got '%s' want '%s'", got, want)
+		t.Errorf("got '%q' want '%q'", got, want)
 	}
 }
