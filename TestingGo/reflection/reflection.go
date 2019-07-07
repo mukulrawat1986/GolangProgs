@@ -4,14 +4,8 @@ import "reflect"
 
 func walk(x interface{}, fn func(input string)) {
 
-	// get the concrete value stored in the interface
-	val := reflect.ValueOf(x)
-
-	// check if the value is of pointer type, if so extract the value that
-	// the pointer points to
-	if val.Kind() == reflect.Ptr {
-		val = val.Elem()
-	}
+	// extract the concrete value from inside the interface
+	val := getValue(x)
 
 	// iterate over the number of fields stored in x, assuming x is a struct
 	for i := 0; i < val.NumField(); i++ {
@@ -29,6 +23,18 @@ func walk(x interface{}, fn func(input string)) {
 			walk(field.Interface(), fn)
 		}
 	}
+}
+
+func getValue(x interface{}) reflect.Value {
+	// extract the concrete value from inside the interface
+	val := reflect.ValueOf(x)
+
+	// check if val is of pointer kind if so extract the value being pointed by it
+	if val.Kind() == reflect.Ptr {
+		val = val.Elem()
+	}
+
+	return val
 }
 
 func main() {
