@@ -43,6 +43,26 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"Chris"},
 		},
+		{
+			Name: "Struct with nested fields",
+			Input: struct {
+				Name    string
+				Profile struct {
+					Age  int
+					City string
+				}
+			}{
+				Name: "Chris",
+				Profile: struct {
+					Age  int
+					City string
+				}{
+					Age:  33,
+					City: "London",
+				},
+			},
+			ExpectedCalls: []string{"Chris", "London"},
+		},
 	}
 
 	for _, test := range cases {
