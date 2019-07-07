@@ -12,8 +12,12 @@ func walk(x interface{}, fn func(input string)) {
 		// get the individual field value
 		field := val.Field(i)
 
-		// apply the function to this field, assuming its a string
-		fn(field.String())
+		// check if the specific type of field is a String
+		if field.Kind() == reflect.String {
+			// apply the function to this field, assuming its a string
+			fn(field.String())
+		}
+
 	}
 }
 
