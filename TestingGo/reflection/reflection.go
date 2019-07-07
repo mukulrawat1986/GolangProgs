@@ -18,6 +18,12 @@ func walk(x interface{}, fn func(input string)) {
 			fn(field.String())
 		}
 
+		// check if the sepcified type of field is a Struct
+		if field.Kind() == reflect.Struct {
+			// recursively call the Walk function
+			walk(field.Interface(), fn)
+		}
+
 	}
 }
 
