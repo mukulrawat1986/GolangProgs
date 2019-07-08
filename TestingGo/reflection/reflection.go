@@ -22,7 +22,7 @@ func walk(x interface{}, fn func(input string)) {
 		getField = val.Field
 
 	// if its a slice, call walk on each index in the slice
-	case reflect.Slice:
+	case reflect.Slice, reflect.Array:
 		numberOfValues = val.Len()
 		getField = val.Index
 
