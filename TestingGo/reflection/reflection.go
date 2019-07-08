@@ -7,23 +7,30 @@ func walk(x interface{}, fn func(input string)) {
 	// extract the underlying concrete value from the interface
 	val := getValue(x)
 
+	numberOfValues := 0
+	var getField func(int) reflect.Value
+
 	switch val.Kind() {
-
-	// if its a struct, call walk on each field in struct
-	case reflect.Struct:
-		for i := 0; i < val.NumField(); i++ {
-			walk(val.Field(i).Interface(), fn)
-		}
-
-	// if its a slice, call walk on each index in the slice
-	case reflect.Slice:
-		for i := 0; i < val.Len(); i++ {
-			walk(val.Index(i).Interface(), fn)
-		}
 
 	// if its a string, apply the function
 	case reflect.String:
 		fn(val.String())
+
+	// if its a struct, call walk on each field in struct
+	case reflect.Struct:
+		numberOfValues = val.NumField()
+		getField = val.Field
+
+	// if its a slice, call walk on each index in the slice
+	case reflect.Slice:
+		numberOfValues = val.Len()
+		getField = val.Index
+
+	}
+
+	// iterate over the struct or slice
+	for i := 0; i < numberOfValues; i++ {
+		walk(getField(i).Interface(), fn)
 	}
 }
 
