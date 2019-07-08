@@ -26,6 +26,12 @@ func walk(x interface{}, fn func(input string)) {
 		numberOfValues = val.Len()
 		getField = val.Index
 
+	// if its a map, iterate over the keys and call walk for each key
+	case reflect.Map:
+		for _, key := range val.MapKeys() {
+			walk(val.MapIndex(key).Interface(), fn)
+		}
+
 	}
 
 	// iterate over the struct or slice
