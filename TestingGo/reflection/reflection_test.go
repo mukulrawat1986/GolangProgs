@@ -117,14 +117,6 @@ func TestWalk(t *testing.T) {
 			},
 			ExpectedCalls: []string{"London", "Reykjavik"},
 		},
-		{
-			Name: "Maps",
-			Input: map[string]string{
-				"Foo": "Bar",
-				"Baz": "Boz",
-			},
-			ExpectedCalls: []string{"Bar", "Boz"},
-		},
 	}
 
 	for _, test := range cases {
@@ -138,5 +130,37 @@ func TestWalk(t *testing.T) {
 				t.Errorf("got '%v', want '%v'", got, test.ExpectedCalls)
 			}
 		})
+	}
+
+	// write new test for Maps where we don't care about the order of
+	// application of function fn
+	t.Run("with maps", func(t *testing.T) {
+		aMap := map[string]string{
+			"foo": "bar",
+			"baz": "boz",
+		}
+
+		var got []string
+		walk(aMap, func(input string) {
+			got = append(got, input)
+		})
+
+		assertContains(t, got, "bar")
+		assertContains(t, got, "boz")
+	})
+
+}
+
+func assertContains(t *testing.T, haystack []string, needle string) {
+	contains := false
+
+	for _, x := range haystack {
+		if x == needle {
+			contains = true
+		}
+	}
+
+	if !contains {
+		t.Errorf("expected %+v to contain '%s' but it didn't", haystack, needle)
 	}
 }
