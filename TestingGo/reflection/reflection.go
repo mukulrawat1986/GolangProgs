@@ -7,6 +7,14 @@ func walk(x interface{}, fn func(input string)) {
 	// extract the concrete value from inside the interface
 	val := getValue(x)
 
+	// check if our value is a slice, if so call walk recursively for each slice element
+	if val.Kind() == reflect.Slice {
+		for i := 0; i < val.Len(); i++ {
+			walk(val.Index(i).Interface(), fn)
+		}
+		return
+	}
+
 	// iterate over the number of fields stored in x, assuming x is a struct
 	for i := 0; i < val.NumField(); i++ {
 		// get the ith field of the struct
