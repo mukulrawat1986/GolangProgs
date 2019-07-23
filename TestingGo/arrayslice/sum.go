@@ -19,6 +19,16 @@ func SumAll(numbersToSum ...[]int) []int {
 	return sums
 }
 
+// SumAllTails function takes varying number of int slices, returning a new
+// slice containing the total of the tail for each slice passed in
+func SumAllTails(numbersToSum ...[]int) []int {
+	var sums []int
+	for _, numbers := range numbersToSum {
+		sums = append(sums, Sum(numbers[1:]))
+	}
+	return sums
+}
+
 func main() {
 
 }
