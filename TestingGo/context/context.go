@@ -7,6 +7,7 @@ import (
 
 type Store interface {
 	Fetch() string
+	Cancel()
 }
 
 // Server starts a long running process to fetch some data
