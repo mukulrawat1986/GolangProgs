@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"fmt"
-	"os"
 	"time"
 )
 
@@ -13,12 +11,7 @@ func main() {
 	// create a child of main context and add cancellation to it
 	ctx, cancel := context.WithCancel(ctx)
 
-	go func() {
-		s := bufio.NewScanner(os.Stdin)
-		s.Scan()
-		cancel()
-	}()
-
+	time.AfterFunc(time.Second, cancel)
 	sleepAndTalk(ctx, 5*time.Second, "Hello, World")
 }
 
