@@ -6,12 +6,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
 
 	// get the context
 	ctx := context.Background()
+
+	// add a context with timeout
+	ctx, cancel := context.WithTimeout(ctx, time.Second)
+	defer cancel()
 
 	req, err := http.NewRequest(http.MethodGet, "http://localhost:8080", nil)
 	if err != nil {
