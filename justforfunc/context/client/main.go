@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"net/http"
@@ -8,7 +9,19 @@ import (
 )
 
 func main() {
-	res, err := http.Get("http://localhost:8080")
+
+	// get the context
+	ctx := context.Background()
+
+	req, err := http.NewRequest(http.MethodGet, "http://localhost:8080", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// add context to our request
+	req = req.WithContext(ctx)
+
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
