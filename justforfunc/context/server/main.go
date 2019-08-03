@@ -13,9 +13,20 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+
+	// the context in handler
+	ctx := r.Context()
+
 	log.Println("Handler started")
 	defer log.Println("Handler ended")
-	// make it really slow
-	time.Sleep(5 * time.Second)
-	fmt.Fprintln(w, "Hello, World")
+
+	select {
+	case <-time.After(5 * time.Second):
+		fmt.Fprintln(w, "Hello, World")
+
+	case <-ctx.Done():
+		err := ctx.Err()
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
