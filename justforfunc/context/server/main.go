@@ -1,15 +1,18 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
+
+	"github.com/mukulrawat1986/GolangProgs/justforfunc/context/log"
 )
 
 func main() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe("127.0.0.1:8080", nil))
+	flag.Parse()
+	http.HandleFunc("/", log.Decorate(handler))
+	panic(http.ListenAndServe("127.0.0.1:8080", nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -17,8 +20,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	// the context in handler
 	ctx := r.Context()
 
-	log.Println("Handler started")
-	defer log.Println("Handler ended")
+	log.Println(ctx, "Handler started")
+	defer log.Println(ctx, "Handler ended")
 
 	select {
 	case <-time.After(5 * time.Second):
@@ -26,7 +29,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	case <-ctx.Done():
 		err := ctx.Err()
-		log.Println(err)
+		log.Println(ctx, err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
