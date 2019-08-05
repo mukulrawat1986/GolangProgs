@@ -22,17 +22,22 @@ func (s *SpyStore) Cancel() {
 }
 
 func TestHandler(t *testing.T) {
-	data := "Hello, World"
-	svr := Server(&SpyStore{
-		response: data,
+
+	t.Run("returns data from store", func(t *testing.T) {
+		data := "Hello, World"
+		svr := Server(&SpyStore{
+			response: data,
+		})
+
+		request := httptest.NewRequest(http.MethodGet, "/", nil)
+		response := httptest.NewRecorder()
+
+		svr.ServeHTTP(response, request)
+
+		if response.Body.String() != data {
+			t.Errorf("got %q want %q", response.Body.String(), data)
+		}
+
 	})
 
-	request := httptest.NewRequest(http.MethodGet, "/", nil)
-	response := httptest.NewRecorder()
-
-	svr.ServeHTTP(response, request)
-
-	if response.Body.String() != data {
-		t.Errorf("got %q want %q", response.Body.String(), data)
-	}
 }
