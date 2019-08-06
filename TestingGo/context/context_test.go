@@ -43,6 +43,10 @@ func TestHandler(t *testing.T) {
 			t.Errorf("got %q want %q", response.Body.String(), data)
 		}
 
+		if store.cancelled {
+			t.Error("it should not have cancelled the store")
+		}
+
 	})
 
 	t.Run("tells store to cancel work if request is cancelled", func(t *testing.T) {
