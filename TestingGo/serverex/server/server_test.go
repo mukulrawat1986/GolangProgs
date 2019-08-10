@@ -26,7 +26,9 @@ func TestGetPlayer(t *testing.T) {
 		},
 	}
 
-	server := &PlayerServer{&store}
+	server := &PlayerServer{
+		Store: &store,
+	}
 
 	t.Run("returns Pepper's score", func(t *testing.T) {
 		request := newGetScoreRequest("Pepper")
@@ -55,6 +57,25 @@ func TestGetPlayer(t *testing.T) {
 		server.ServeHTTP(response, request)
 
 		assertStatus(t, response.Code, http.StatusNotFound)
+	})
+}
+
+func TestStoreWins(t *testing.T) {
+	store := StubPlayerStore{
+		score: map[string]int{},
+	}
+
+	server := &PlayerServer{
+		Store: &store,
+	}
+
+	t.Run("it returns accepted on POST", func(t *testing.T) {
+		request := httptest.NewRequest(http.MethodGet, "/players/Pepper", nil)
+		response := httptest.NewRecorder()
+
+		server.ServeHTTP(response, request)
+
+		assertStatus(t, response.Code, http.StatusAccepted)
 	})
 }
 
