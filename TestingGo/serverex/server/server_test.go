@@ -67,16 +67,16 @@ func TestGetPlayer(t *testing.T) {
 }
 
 func TestStoreWins(t *testing.T) {
-	store := StubPlayerStore{
-		score: map[string]int{},
-		winCalls: nil,
-	}
-
-	server := &PlayerServer{
-		Store: &store,
-	}
 
 	t.Run("it returns accepted on POST", func(t *testing.T) {
+		store := StubPlayerStore{
+			score: map[string]int{},
+			winCalls: nil,
+		}
+
+		server := &PlayerServer{
+			Store: &store,
+		}
 		request := httptest.NewRequest(http.MethodPost, "/players/Pepper", nil)
 		response := httptest.NewRecorder()
 
@@ -86,6 +86,14 @@ func TestStoreWins(t *testing.T) {
 	})
 
 	t.Run("it records win when Post", func(t *testing.T) {
+		store := StubPlayerStore{
+			score: map[string]int{},
+			winCalls: nil,
+		}
+
+		server := &PlayerServer{
+			Store: &store,
+		}
 		request := newPostWinRequest("Pepper")
 		response := httptest.NewRecorder()
 
