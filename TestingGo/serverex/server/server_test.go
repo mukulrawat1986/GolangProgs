@@ -29,6 +29,7 @@ func TestGetPlayer(t *testing.T) {
 			"Pepper": 20,
 			"Floyd":  10,
 		},
+		winCalls: nil,
 	}
 
 	server := &PlayerServer{
@@ -68,6 +69,7 @@ func TestGetPlayer(t *testing.T) {
 func TestStoreWins(t *testing.T) {
 	store := StubPlayerStore{
 		score: map[string]int{},
+		winCalls: nil,
 	}
 
 	server := &PlayerServer{
