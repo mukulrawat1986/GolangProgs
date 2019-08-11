@@ -7,18 +7,28 @@ import (
 	"github.com/mukulrawat1986/GolangProgs/TestingGo/serverex/server"
 )
 
-type InMemoryPlayerStore struct{}
-
-func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
-	return 123
+func NewInMemoryPlayerStore() *InMemoryPlayerStore {
+	return &InMemoryPlayerStore{
+		store: map[string]int{},
+	}
 }
 
-func (i *InMemoryPlayerStore) RecordWin(name string) {}
+type InMemoryPlayerStore struct{
+	store map[string]int
+}
+
+func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
+	return i.store[name]
+}
+
+func (i *InMemoryPlayerStore) RecordWin(name string) {
+	i.store[name]++
+}
 
 func main() {
 
 	server := &server.PlayerServer{
-		Store: &InMemoryPlayerStore{},
+		Store: NewInMemoryPlayerStore(),
 	}
 
 	if err := http.ListenAndServe(":5000", server); err != nil {
