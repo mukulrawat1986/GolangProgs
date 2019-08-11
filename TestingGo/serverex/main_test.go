@@ -11,9 +11,9 @@ import (
 
 // Integration test
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
-	store := InMemoryPlayerStore{}
-	server := server.PlayerServer{
-		Store: &store,
+	store := NewInMemoryPlayerStore()
+	server := &server.PlayerServer{
+		Store: store,
 	}
 	player := "Pepper"
 
