@@ -19,22 +19,25 @@ func (p *PlayerServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// create a new servemux
 	router := http.NewServeMux()
 
-	router.Handle("/league", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-		w.WriteHeader(http.StatusOK)
-	}))
+	router.Handle("/league", http.HandlerFunc(p.leagueHandler))
+	router.Handle("/players/", http.HandlerFunc(p.playersHandler))
 
-	router.Handle("/players/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-		player := r.URL.Path[len("/players/"):]
+	router.ServeHTTP(w, r)
+}
 
-		switch r.Method {
-		case http.MethodPost:
-			p.processWin(w, player)
-		case http.MethodGet:
-			p.showScore(w, player)
-		}
-	}))
+func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
 
-	router.ServeHTTP(w,r)
+func (p *PlayerServer) playersHandler(w http.ResponseWriter, r *http.Request) {
+	player := r.URL.Path[len("/players/"):]
+
+	switch r.Method {
+	case http.MethodPost:
+		p.processWin(w, player)
+	case http.MethodGet:
+		p.showScore(w, player)
+	}
 }
 
 func (p *PlayerServer) showScore(w http.ResponseWriter, player string) {
