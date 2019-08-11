@@ -111,5 +111,24 @@ func TestStoreWins(t *testing.T) {
 			t.Errorf("did not store correct winner, got %q want %q", store.winCalls[0], player)
 		}
 	})
+}
 
+func TestLeague(t *testing.T) {
+	store := StubPlayerStore{
+		score:    map[string]int{},
+		winCalls: nil,
+	}
+
+	server := &PlayerServer{
+		Store: &store,
+	}
+
+	t.Run("it returns 200 on /league", func(t *testing.T) {
+		request := httptest.NewRequest(http.MethodGet, "/league", nil)
+		response := httptest.NewRecorder()
+
+		server.ServeHTTP(response, request)
+
+		AssertStatus(t, response.Code, http.StatusOK)
+	})
 }
