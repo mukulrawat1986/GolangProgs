@@ -7,11 +7,6 @@ import (
 	"testing"
 )
 
-type Player struct {
-	Name string
-	Wins int
-}
-
 // create a stub of the PlayerStore
 type StubPlayerStore struct {
 	score map[string]int
