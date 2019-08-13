@@ -20,6 +20,13 @@ func main() {
 		"Leo",
 	}
 
-	go GreetNames(names, " <C> ")
+	comm := make(chan string)
+
+	go func() {
+		GreetNames(names, " <C> ")
+		comm <- "finished greeting names concurrently..."
+	}()
+
 	GreetNames(names, " <M> ")
+	fmt.Println(<-comm)
 }
