@@ -6,9 +6,9 @@ func Greet(name string) {
 	fmt.Println("Hello, " + name)
 }
 
-func GreetNames(names []string) {
+func GreetNames(names []string, suffix string) {
 	for _, name := range names {
-		Greet(name)
+		Greet(name + suffix)
 	}
 }
 
@@ -20,5 +20,6 @@ func main() {
 		"Leo",
 	}
 
-	GreetNames(names)
+	go GreetNames(names, " <C> ")
+	GreetNames(names, " <M> ")
 }
