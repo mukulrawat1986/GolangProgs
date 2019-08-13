@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func Greet(name string) {
+	fmt.Println("Hello, " + name)
+}
+
 func main() {
 	names := []string{
 		"Mark",
@@ -11,6 +15,6 @@ func main() {
 	}
 
 	for _, name := range names {
-		fmt.Println("Hello, " + name)
+		Greet(name)
 	}
 }
