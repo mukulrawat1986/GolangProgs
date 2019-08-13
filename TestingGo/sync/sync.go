@@ -1,10 +1,13 @@
 package _sync
 
-type Counter struct{}
+type Counter struct {
+	value int
+}
 
 func (c *Counter) Inc() {
+	c.value++
 }
 
 func (c *Counter) Value() int {
-	return 3
+	return c.value
 }
