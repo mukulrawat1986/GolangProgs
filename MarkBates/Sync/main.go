@@ -18,4 +18,5 @@ func main() {
 		fmt.Println("func 2")
 	}()
 
+	time.Sleep(4 * time.Second)
 }
