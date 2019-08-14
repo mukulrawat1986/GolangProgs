@@ -11,9 +11,7 @@ func TestCounter(t *testing.T) {
 		counter.Inc()
 		counter.Inc()
 
-		if counter.Value() != 3 {
-			t.Errorf("got %d want %d", counter.Value(), 3)
-		}
+		assertCounter(t, counter.Value(), 3)
 	})
 
 	t.Run("incrementing the counter 4 times and leaves it at 4", func(t *testing.T) {
@@ -25,8 +23,13 @@ func TestCounter(t *testing.T) {
 		counter.Inc()
 		counter.Inc()
 
-		if counter.Value() != 4 {
-			t.Errorf("got %d want %d", counter.Value(), 4)
-		}
+		assertCounter(t, counter.Value(), 4)
 	})
+}
+
+func assertCounter(t *testing.T, got, want int) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %d want %d", got, want)
+	}
 }
