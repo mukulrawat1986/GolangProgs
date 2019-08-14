@@ -6,17 +6,23 @@ import (
 )
 
 func main() {
-	go func() {
+
+	queue := make(chan string)
+
+	go func(queue chan string) {
 		fmt.Println("func 1")
 		time.Sleep(2 * time.Second)
 		fmt.Println("func 1")
-	}()
+		queue <- "done func 1"
+	}(queue)
 
-	go func() {
+	go func(queue chan string) {
 		fmt.Println("func 2")
 		time.Sleep(1 * time.Second)
 		fmt.Println("func 2")
-	}()
+		queue <- "done func 2"
+	}(queue)
 
-	time.Sleep(4 * time.Second)
+	fmt.Println(<-queue)
+	fmt.Println(<-queue)
 }
