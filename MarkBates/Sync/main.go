@@ -23,6 +23,10 @@ func main() {
 		queue <- "done func 2"
 	}(queue)
 
-	fmt.Println(<-queue)
-	fmt.Println(<-queue)
+	// fmt.Println(<-queue)
+	// fmt.Println(<-queue)
+
+	for text := range queue {
+		fmt.Println(text)
+	}
 }
