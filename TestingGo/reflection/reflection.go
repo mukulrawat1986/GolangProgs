@@ -13,11 +13,11 @@ func walk(x interface{}, fn func(string)) {
 		// it panics if val's Kind is not struct or i is out of range
 		field := val.Field(i)
 
-		if field.Kind() == reflect.String {
+		switch field.Kind() {
+		case reflect.String:
 			fn(field.String())
-		}
 
-		if field.Kind() == reflect.Struct {
+		case reflect.Struct:
 			walk(field.Interface(), fn)
 		}
 	}
