@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"strings"
 )
 
 type User struct {
@@ -34,9 +35,9 @@ func main() {
 	u := User{}
 
 	// decode the json string into user object
-	//	json.NewDecoder(strings.NewReader(s)).Decode(&u)
+	json.NewDecoder(strings.NewReader(s)).Decode(&u)
 
-	json.Unmarshal([]byte(s), &u)
+	//  	json.Unmarshal([]byte(s), &u)
 
 	log.Printf("u.FirstName: %s\n", u.FirstName)
 	log.Printf("u.LastName: %s\n", u.LastName)
