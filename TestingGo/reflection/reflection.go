@@ -6,6 +6,12 @@ func walk(x interface{}, fn func(string)) {
 	// get the concrete value stored in the interface
 	val := reflect.ValueOf(x)
 
+	// check if the concrete value stored in the interface is of pointer type
+	if val.Kind() == reflect.Ptr {
+		// get the value that the pointer val points to
+		val  = val.Elem()
+	}
+
 	// iterate over all fields in the struct val
 	for i := 0; i < val.NumField(); i++ {
 
