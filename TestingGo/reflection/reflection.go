@@ -6,30 +6,28 @@ func walk(x interface{}, fn func(string)) {
 
 	val := getValue(x)
 
-	// check if val is a slice
-	if val.Kind() == reflect.Slice {
-		// iterate over the slice
+	// check the type of val
+	switch val.Kind() {
+
+	// if value is of struct type
+	case reflect.Struct:
+		// iterate over the fields of the struct
+		for i := 0; i < val.NumField(); i++ {
+			//  call the walk function for each field
+			walk(val.Field(i).Interface(), fn)
+		}
+
+	// if value if of slice type
+	case reflect.Slice:
+		// iterate over the elements of the slice
 		for i := 0; i < val.Len(); i++ {
-			// for each individual slice element call walk
+			// call the walk function for each element
 			walk(val.Index(i).Interface(), fn)
 		}
-		return
-	}
 
-	// iterate over all fields in the struct val
-	for i := 0; i < val.NumField(); i++ {
-
-		// get the ith field of the struct val
-		// it panics if val's Kind is not struct or i is out of range
-		field := val.Field(i)
-
-		switch field.Kind() {
-		case reflect.String:
-			fn(field.String())
-
-		case reflect.Struct:
-			walk(field.Interface(), fn)
-		}
+	// if value is of string type
+	case reflect.String:
+		fn(val.String())
 	}
 }
 
