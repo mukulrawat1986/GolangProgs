@@ -25,6 +25,13 @@ func walk(x interface{}, fn func(string)) {
 			walk(val.Index(i).Interface(), fn)
 		}
 
+	// if value if of map type
+	case reflect.Map:
+		// iterate over the map
+		for _, key :=  range val.MapKeys() {
+			walk(val.MapIndex(key).Interface(), fn)
+		}
+
 	// if value is of string type
 	case reflect.String:
 		fn(val.String())
