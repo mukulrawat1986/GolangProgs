@@ -6,7 +6,7 @@ import (
 )
 
 type User struct {
-	FirstName string
+	FirstName string `json:"first_name"`
 	LastName  string
 	Password  string `json:"-"`
 }
