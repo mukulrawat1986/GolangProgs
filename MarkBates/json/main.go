@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"os"
 )
 
 type User struct {
@@ -20,7 +20,5 @@ func main() {
 	}
 
 	// encode the struct to json
-	m, _ := json.Marshal(u)
-
-	fmt.Println(string(m))
+	json.NewEncoder(os.Stdout).Encode(u)
 }
