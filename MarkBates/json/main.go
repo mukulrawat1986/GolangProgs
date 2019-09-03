@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"os"
+	"log"
 )
 
 type User struct {
@@ -21,8 +21,23 @@ func main() {
 		}
 	*/
 
+	// encode the struct to json
+	// 	json.NewEncoder(os.Stdout).Encode(u)
+
+	s := `
+		{
+			"first_name":"Mark",
+			"LastName":"Bates"
+		}
+	`
+
 	u := User{}
 
-	// encode the struct to json
-	json.NewEncoder(os.Stdout).Encode(u)
+	// decode the json string into user object
+	//	json.NewDecoder(strings.NewReader(s)).Decode(&u)
+
+	json.Unmarshal([]byte(s), &u)
+
+	log.Printf("u.FirstName: %s\n", u.FirstName)
+	log.Printf("u.LastName: %s\n", u.LastName)
 }
