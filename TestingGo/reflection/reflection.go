@@ -6,6 +6,16 @@ func walk(x interface{}, fn func(string)) {
 
 	val := getValue(x)
 
+	// check if val is a slice
+	if val.Kind() == reflect.Slice {
+		// iterate over the slice
+		for i := 0; i < val.Len(); i++ {
+			// for each individual slice element call walk
+			walk(val.Index(i).Interface(), fn)
+		}
+		return
+	}
+
 	// iterate over all fields in the struct val
 	for i := 0; i < val.NumField(); i++ {
 
