@@ -2,8 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"log"
-	"strings"
+	"os"
 )
 
 type User struct {
@@ -12,33 +11,26 @@ type User struct {
 	Password  string `json:"-"`
 }
 
+func (u User) MarshalJSON() ([]byte, error) {
+
+	m := struct {
+		FirstName string
+		LastName  string
+	}{
+		FirstName: "Mark",
+		LastName:  "Bates",
+	}
+
+	return json.Marshal(m)
+}
 func main() {
 
-	/*
-		u := User{
-			FirstName: "Mark",
-			LastName:  "Bates",
-			Password:  "password",
-		}
-	*/
+	u := User{
+		FirstName: "Mark",
+		LastName:  "Bates",
+	}
 
 	// encode the struct to json
-	// 	json.NewEncoder(os.Stdout).Encode(u)
+	json.NewEncoder(os.Stdout).Encode(u)
 
-	s := `
-		{
-			"first_name":"Mark",
-			"LastName":"Bates"
-		}
-	`
-
-	u := User{}
-
-	// decode the json string into user object
-	json.NewDecoder(strings.NewReader(s)).Decode(&u)
-
-	//  	json.Unmarshal([]byte(s), &u)
-
-	log.Printf("u.FirstName: %s\n", u.FirstName)
-	log.Printf("u.LastName: %s\n", u.LastName)
 }
