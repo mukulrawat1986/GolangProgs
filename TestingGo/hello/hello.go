@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// Hello returns a string
 func Hello() string {
 	return "Hello, World!"
 }
