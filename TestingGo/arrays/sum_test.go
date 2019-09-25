@@ -42,4 +42,13 @@ func TestSumAll(t *testing.T) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
+
+	t.Run("safely sum empty slices", func(t *testing.T) {
+		got := SumAll([]int{}, []int{1, 2})
+		want := []int{0, 3}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }
