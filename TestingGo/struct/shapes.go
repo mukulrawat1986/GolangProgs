@@ -1,11 +1,24 @@
 package structint
 
-// Perimeter function calculates the perimeter of a rectangle
-func Perimeter(width, height float64) float64 {
-	return 2 * (width + height)
+import "math"
+
+// Rectangle struct representing the rectangle shape
+type Rectangle struct {
+	Width  float64
+	Height float64
 }
 
-// Area function calculates the area of a rectangle
-func Area(width, height float64) float64 {
-	return width * height
+// Area method calculates the area of a rectangle
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// Circle struct representing the circle shape
+type Circle struct {
+	Radius float64
+}
+
+// Area method calculates the area of the circle
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
 }
