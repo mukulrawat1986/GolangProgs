@@ -2,6 +2,11 @@ package structint
 
 import "math"
 
+// Shape is a general interface for all shapes having an Area method
+type Shape interface {
+	Area() float64
+}
+
 // Rectangle struct representing the rectangle shape
 type Rectangle struct {
 	Width  float64
