@@ -15,6 +15,12 @@ func TestArea(t *testing.T) {
 			},
 			want: 72.0,
 		},
+		{
+			shape: Circle{
+				Radius: 10.0,
+			},
+			want: 314.1592653589793,
+		},
 	}
 
 	for _, tt := range areaTests {
