@@ -24,3 +24,8 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
+
+// Withdraw method withdraws Bitcoin from the wallet and updates balance
+func (w *Wallet) Withdraw(amount Bitcoin) {
+
+}
