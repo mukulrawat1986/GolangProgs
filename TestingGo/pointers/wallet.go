@@ -1,7 +1,14 @@
 package pointers
 
+import "fmt"
+
 // Bitcoin type
 type Bitcoin int
+
+// String function returns the string value and satisfies the Stringer interface
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
+}
 
 // Wallet type to represent a bitcoin wallet
 type Wallet struct {
