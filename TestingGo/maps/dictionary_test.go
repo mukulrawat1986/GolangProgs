@@ -8,22 +8,23 @@ func TestSearch(t *testing.T) {
 	}
 
 	t.Run("known word", func(t *testing.T) {
-		got, _ := dictionary.Search("test")
-		want := "this is just a test"
-
-		assertString(t, got, want)
+		got, err := dictionary.Search("test")
+		assertError(t, err, nil)
+		assertString(t, got, "this is just a test")
 	})
 
 	t.Run("unknown word", func(t *testing.T) {
 		_, err := dictionary.Search("unknown")
-		want := "could not find the word you were looking for"
-
-		if err == nil {
-			t.Fatal("expected to get an error")
-		}
-
-		assertString(t, err.Error(), want)
+		assertError(t, err, ErrNotFound)
 	})
+}
+
+func assertError(t *testing.T, got, want error) {
+	t.Helper()
+
+	if got != want {
+		t.Errorf("got error %q want %q", got, want)
+	}
 }
 
 func assertString(t *testing.T, got, want string) {
