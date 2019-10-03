@@ -5,6 +5,9 @@ import "errors"
 var (
 	// ErrNotFound error typoe when we can't find a word in the dictionary
 	ErrNotFound = errors.New("could not find the word you were looking for")
+
+	// ErrWordExists error type when the word already exists in the dictionary
+	ErrWordExists = errors.New("cannot add word because it already exists")
 )
 
 // Dictionary type based on map
