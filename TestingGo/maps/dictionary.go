@@ -3,11 +3,14 @@ package dictionary
 import "errors"
 
 var (
+	// ErrNotFound error typoe when we can't find a word in the dictionary
 	ErrNotFound = errors.New("could not find the word you were looking for")
 )
 
+// Dictionary type based on map
 type Dictionary map[string]string
 
+// Search method is used to search for a word in the dictionary
 func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
 	if !ok {
@@ -16,6 +19,7 @@ func (d Dictionary) Search(word string) (string, error) {
 	return definition, nil
 }
 
+// Add method to add words and definition to a dictionary
 func (d Dictionary) Add(word, definition string) error {
 	d[word] = definition
 	return nil
